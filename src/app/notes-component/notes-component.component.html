@@ -1,0 +1,17 @@
+<div class="add-note">
+    <span>
+        <input matInput type="text" #noteToAdd>
+        <input matInput type="text" #noteToAdd>
+    </span>
+    <span>
+        <button mat-button color="primary" (click)="addNote(noteToAdd.value); saveLocal(noteToAdd.value)">Add Item</button>
+        <button mat-button color="warn" (click)="removeAllNotes()">Rmove All</button>
+    </span>
+</div>
+<div class="display-notes" *ngFor="let note of notes; let i = index">
+    <mat-card>
+        <span>{{note}}
+            <button mat-button color="warn" (click)="removeNote(i)">Delete</button>
+        </span>
+    </mat-card>
+</div>
