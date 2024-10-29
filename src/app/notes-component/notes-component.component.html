@@ -1,10 +1,16 @@
 <div class="add-note">
     <span>
-        <input matInput type="text" #noteToAdd>
-        <input matInput type="text" #noteToAdd>
+        <input matInput type="text" #noteToAdd #fileName>
+        <mat-button-toggle-group #userSelection="matButtonToggleGroup" multiple hideMultipleSelectionIndicator=true>
+            <mat-button-toggle value="line">line</mat-button-toggle>
+            <mat-button-toggle value="repetition">repetition</mat-button-toggle>
+            <mat-button-toggle value="cmyk">cmyk</mat-button-toggle>
+        </mat-button-toggle-group>
+        <h4>User selection is: {{ userSelection.value}}</h4>
     </span>
     <span>
-        <button mat-button color="primary" (click)="addNote(noteToAdd.value); saveLocal(noteToAdd.value)">Add Item</button>
+        <button mat-button color="primary" 
+        (click)="addNote(noteToAdd.value); saveLocal(fileName.value, userSelection.value)">Add Item</button>
         <button mat-button color="warn" (click)="removeAllNotes()">Rmove All</button>
     </span>
 </div>

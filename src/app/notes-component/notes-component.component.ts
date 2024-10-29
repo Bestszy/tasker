@@ -2,21 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { NgFor } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-notes-component',
   standalone: true,
-  imports: [MatButtonModule, MatCardModule, NgFor],
+  imports: [MatButtonModule, MatCardModule, MatButtonToggleModule, NgFor, FormsModule],
   templateUrl: './notes-component.component.html',
   styleUrl: './notes-component.component.css',
   providers: [CookieService]
 })
 export class NotesComponentComponent implements OnInit {
   notes:string[]=[];
-  cart:string[]=[]
-  
+  cart:string[]=[];
+  //userSelection:string[]=[]
   constructor(
     private cookieservice: CookieService
   ){}
@@ -32,7 +34,6 @@ export class NotesComponentComponent implements OnInit {
   removeNote(index: number):void{
     this.notes.splice(index,1);
     this.saveToCookies()
-
   }
   removeAllNotes():void{
     this.notes=[];
@@ -44,8 +45,8 @@ export class NotesComponentComponent implements OnInit {
   loadFromCookies():void{
     this.notes=JSON.parse(this.cookieservice.get("notes"));
   }
-  saveLocal(note: string): void{
-    this.cart.push(note)
-    localStorage.setItem("a",JSON.stringify(this.cart))
+  saveLocal(fileName: string, userSelection: string ): void{
+    localStorage.setItem(fileName, userSelection )
+    console.log(userSelection)
   }
 }
